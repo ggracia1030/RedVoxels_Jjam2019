@@ -9,8 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Goal
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON _EMISSION
-  m_LightmapFlags: 1
+  m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
+  m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -74,5 +74,5 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.058670282, a: 0.3372549}
-    - _EmissionColor: {r: 0.1792453, g: 0.15979888, b: 0.15979888, a: 1}
+    - _Color: {r: 0, g: 1, b: 0.058670282, a: 0.1882353}
+    - _EmissionColor: {r: 0.048724387, g: 0.49056602, b: 0, a: 1}

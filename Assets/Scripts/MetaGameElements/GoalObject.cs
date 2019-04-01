@@ -5,9 +5,8 @@ using UnityEngine;
 public class GoalObject : MonoBehaviour
 {
 
-
+    private MetaGameManager metaGameManager;
     [SerializeField] private float maxGoalTime;
-
     private float actualGoalTime;
 
 
@@ -20,7 +19,7 @@ public class GoalObject : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        metaGameManager = GameObject.Find("GameManager").GetComponent<MetaGameManager>();
         actualGoalTime = maxGoalTime;
 
     }
@@ -41,8 +40,8 @@ public class GoalObject : MonoBehaviour
             if(actualGoalTime <= 0)
             {
                 actualGoalTime = maxGoalTime;
-
-                //THEN WE CHANGE THE LEVEL
+                //THEN WE CHANGE THE LEVEL with the FADE
+                GameManager.Instance.ChangeToNextLevel();
 
             }
 
