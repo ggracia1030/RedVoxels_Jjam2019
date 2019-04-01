@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerGame : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,11 @@ public class PlayerGame : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void PlayerMovement()
+    {
+        InputManager.Instance.GetAxis("vertical");
+        InputManager.Instance.GetAxis("horitzontal");
     }
 }
