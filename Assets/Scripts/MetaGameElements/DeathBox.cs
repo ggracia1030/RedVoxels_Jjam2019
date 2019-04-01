@@ -2,26 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoalObject : MonoBehaviour
+public class DeathBox : MonoBehaviour
 {
 
-
-    [SerializeField] private float maxGoalTime;
-
-    private float actualGoalTime;
-
-
-    private void Awake()
-    {
-        
-
-    }
+    private MetaGameManager metaGameManager;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        actualGoalTime = maxGoalTime;
+        metaGameManager = GameObject.Find("GameManager").GetComponent<MetaGameManager>();
+
 
     }
 
@@ -31,21 +22,13 @@ public class GoalObject : MonoBehaviour
         
     }
 
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Player")
         {
-
-            actualGoalTime -= Time.deltaTime;
-
-            if(actualGoalTime <= 0)
-            {
-                actualGoalTime = maxGoalTime;
-
-                //THEN WE CHANGE THE LEVEL
-
-            }
-
+            //THEN HES DEAAD
+            metaGameManager.ResetMetaPlayerPosition();
 
         }
     }
@@ -54,7 +37,7 @@ public class GoalObject : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            actualGoalTime = maxGoalTime;
+
         }
     }
 }
