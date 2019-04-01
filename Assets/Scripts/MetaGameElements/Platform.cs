@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class Platform : MonoBehaviour
 {
 
+    private MetaGameManager metaGameManager;
 
-    public GameObject platform;
+    public enum Platformtype {MOVING , STATIC, DEATH}
+    public Platformtype pType;
+
     public float moveSpeed;
 
     //movement mechanics
@@ -23,11 +26,16 @@ public class MovingPlatform : MonoBehaviour
     private int goingBackNum;
 
 
+
+
     public bool debugBoolForMatchingNPCPos = false; //DEBUG TOOL TO BE DELETEEEEED
 
     // Use this for initialization
     void Start()
     {
+
+        metaGameManager = GameObject.Find("GameManager").GetComponent<MetaGameManager>();
+
         //if there's no moving points it will not be called
         if (Points.Length <= 0)
         {
@@ -139,8 +147,50 @@ public class MovingPlatform : MonoBehaviour
             Gizmos.DrawCube(Points[Points.Length - 1], new Vector3(0.5f, 0.5f, 0.5f));
 
         }
-
-
-
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+
+            switch (pType)
+            {
+                case Platformtype.MOVING:
+                case Platformtype.STATIC:
+                default:
+                    collision.transform.parent = gameObject.transform;
+                    break;
+                case Platformtype.DEATH:
+                    //THEN HES DEAAD
+                    metaGameManager.ResetMetaPlayerPosition();
+                    break;
+                
+            }
+
+            
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+
+            switch (pType)
+            {
+                case Platformtype.MOVING:
+                case Platformtype.STATIC:
+                default:
+                    collision.transform.parent = null;
+                    break;
+                case Platformtype.DEATH:
+                    break;
+
+            }
+
+        }
+    }
+
+
 }
