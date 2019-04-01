@@ -10,14 +10,15 @@ public class InputManager : Singleton<InputManager>
 
 
     // Start is called before the first frame update
-    void Start()
+
+    public void Init()
     {
         
     }
 
+
     public bool GetButtonDown(string btn)
     {
-        
         return Input.GetButtonDown(btn);
     }
 
