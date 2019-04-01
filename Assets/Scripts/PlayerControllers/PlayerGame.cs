@@ -10,6 +10,7 @@ public class PlayerGame : MonoBehaviour
     Quaternion direction;
     Vector3 inputMovement, jumpForceVector;
     bool space, canJump;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +60,27 @@ public class PlayerGame : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
+
         if (canJump = collision.contacts[0].normal.y > 0.5) { }
+
+        if (collision.gameObject.tag == "Key")
+        {
+            collision.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
+        }
+      
+       
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+
+        
+
+        if (collision.gameObject.tag == "Key")
+        {
+            collision.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+        }
+
+
     }
 }
