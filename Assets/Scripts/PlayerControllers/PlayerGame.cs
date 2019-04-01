@@ -57,7 +57,7 @@ public class PlayerGame : MonoBehaviour
         tf.rotation = Quaternion.Euler(0,Vector3.Normalize(inputMovement).y,0);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (canJump = collision.contacts[0].normal.y > 0.5) { }
     }
