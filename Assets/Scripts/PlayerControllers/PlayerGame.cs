@@ -6,9 +6,10 @@ public class PlayerGame : MonoBehaviour
 {
     Transform tf;
     Rigidbody rb;
-    public float speed;
+    public float speed, jumpForce;
     Quaternion direction;
-    Vector3 inputMovement;
+    Vector3 inputMovement, jumpForceVector;
+    bool space, canJump;
 
     // Start is called before the first frame update
     void Start()
@@ -27,22 +28,37 @@ public class PlayerGame : MonoBehaviour
     {
         PlayerMovement();
         RotatePlayer();
+        
     }
 
 
     void UpdateInput()
     {
-        inputMovement = new Vector3(InputManager.Instance.GetAxis("Horizontal") * Time.deltaTime * speed * 100, -4f, InputManager.Instance.GetAxis("Vertical") * Time.deltaTime * speed * 100);
-        if (InputManager.Instance.GetKeyDown(KeyCode.Space)) Debug.Log("hdjsafdsaf");
+        inputMovement = new Vector3(InputManager.Instance.GetAxis("Horizontal") * Time.deltaTime * speed * 100, 0, InputManager.Instance.GetAxis("Vertical") * Time.deltaTime * speed * 100);
+        space = InputManager.Instance.GetKeyDown(KeyCode.Space); 
     }
 
     void PlayerMovement()
     {
-        rb.velocity = inputMovement;
+        rb.velocity = inputMovement + rb.velocity.y * Vector3.up;
+        if (space && canJump) PlayerJump();
+    }
+
+    void PlayerJump()
+    {
+        jumpForceVector = new Vector3(0f, jumpForce * 100, 0f);
+        rb.AddForce(jumpForceVector);
+        canJump = false;
+        Debug.Log("jump");
     }
 
     void RotatePlayer()
     {
         tf.rotation = Quaternion.Euler(0,Vector3.Normalize(inputMovement).y,0);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (canJump = collision.contacts[0].normal.y > 0.5) { }
     }
 }
