@@ -5,16 +5,19 @@ using UnityEngine;
 public class PlayerMetaGame : MonoBehaviour
 {
     public Vector3 inputMovement;
-    bool jumpInput;
-    public Vector3 startPosition;
+    bool jumpInput, canJump;
+    public Vector3 startPosition, jumpForceVector;
+    [SerializeField] float jumpForce;
     Rigidbody rb;
     [SerializeField] Keyboard keyboard;
+
 
     // Start is called before the first frame update
     void Start()
     {
         startPosition = transform.position;
         rb = GetComponent<Rigidbody>();
+        canJump = false;
     }
 
     private void FixedUpdate()
@@ -27,6 +30,8 @@ public class PlayerMetaGame : MonoBehaviour
     {
         UpdateVariables();
         UpdateControlls();
+        if (canJump && jumpInput)  PlayerJump();
+        CheckJump();   
     }
 
     void UpdateControlls()
@@ -47,6 +52,10 @@ public class PlayerMetaGame : MonoBehaviour
         if (keyboard.IsPressed(Key.KeyType.S))
         {
             inputMovement.z -= 1;
+        }
+        if(jumpInput = keyboard.IsPressed(Key.KeyType.Space))
+        {
+            
         }
     }
 
@@ -93,5 +102,22 @@ public class PlayerMetaGame : MonoBehaviour
         jumpInput = _jump;
     }
 
-    
+   void CheckJump()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(rb.position, Vector3.down , out hit , Mathf.Infinity ))
+        {
+            if (canJump = hit.distance < 0.7f) { }
+        }
+    }
+
+    void PlayerJump()
+    {
+        jumpForceVector = new Vector3(0f, jumpForce * 100, 0f);
+        rb.AddForce(jumpForceVector);
+        canJump = false;
+        Debug.Log("jump");
+    }
+
+
 }
