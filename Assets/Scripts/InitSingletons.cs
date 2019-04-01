@@ -7,7 +7,11 @@ public class InitSingletons : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        InputManager.Instance.Init();
-        GameManager.Instance.Init();
+        if (GameObject.Find("(singleton) GameManager") == null)
+        {
+            InputManager.Instance.Init();
+            GameManager.Instance.Init();
+        }
+        Destroy(gameObject);
     }
 }
