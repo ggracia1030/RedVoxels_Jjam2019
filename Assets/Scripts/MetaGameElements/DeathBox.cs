@@ -11,7 +11,7 @@ public class DeathBox : MonoBehaviour
     void Start()
     {
 
-        metaGameManager = GameObject.Find("GameManager").GetComponent<MetaGameManager>();
+        metaGameManager = GameObject.Find("MetaGameManager").GetComponent<MetaGameManager>();
 
 
     }

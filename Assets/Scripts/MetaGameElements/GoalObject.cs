@@ -4,37 +4,24 @@ using UnityEngine;
 
 public class GoalObject : MonoBehaviour
 {
-
     private MetaGameManager metaGameManager;
     [SerializeField] private float maxGoalTime;
     private float actualGoalTime;
 
-
-    private void Awake()
-    {
-        
-
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        metaGameManager = GameObject.Find("GameManager").GetComponent<MetaGameManager>();
+        metaGameManager = GameObject.Find("MetaGameManager").GetComponent<MetaGameManager>();
         actualGoalTime = maxGoalTime;
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void OnTriggerStay(Collider other)
     {
-        
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Player")
+
+        if (other.gameObject.tag == "Player")
         {
-
             actualGoalTime -= Time.deltaTime;
 
             if(actualGoalTime <= 0)
@@ -49,11 +36,12 @@ public class GoalObject : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             actualGoalTime = maxGoalTime;
         }
     }
+
 }

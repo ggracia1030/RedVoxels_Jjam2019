@@ -34,7 +34,7 @@ public class Platform : MonoBehaviour
     void Start()
     {
 
-        metaGameManager = GameObject.Find("GameManager").GetComponent<MetaGameManager>();
+        metaGameManager = GameObject.Find("MetaGameManager").GetComponent<MetaGameManager>();
 
         //if there's no moving points it will not be called
         if (Points.Length <= 0)
