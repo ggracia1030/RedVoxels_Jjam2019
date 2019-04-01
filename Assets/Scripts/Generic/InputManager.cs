@@ -22,6 +22,11 @@ public class InputManager : Singleton<InputManager>
         return Input.GetButtonDown(btn);
     }
 
+    public bool GetKeyDown(KeyCode btn)
+    {
+        return Input.GetKeyDown(btn);
+    }
+
     public bool GetButton(string btn)
     {
         return Input.GetButton(btn);
