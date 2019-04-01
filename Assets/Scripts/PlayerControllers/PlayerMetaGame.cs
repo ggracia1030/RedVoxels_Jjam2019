@@ -4,14 +4,50 @@ using UnityEngine;
 
 public class PlayerMetaGame : MonoBehaviour
 {
-    Vector3 inputMovement;
+    public Vector3 inputMovement;
     bool jumpInput;
     public Vector3 startPosition;
+    Rigidbody rb;
+    [SerializeField] Keyboard keyboard;
 
     // Start is called before the first frame update
     void Start()
     {
         startPosition = transform.position;
+        rb = GetComponent<Rigidbody>();
+    }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = Vector3.right * inputMovement.x + Vector3.up * rb.velocity.y + Vector3.forward * inputMovement.z;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        UpdateVariables();
+        UpdateControlls();
+    }
+
+    void UpdateControlls()
+    {
+        if(keyboard.IsPressed(Key.KeyType.A))
+        {
+            inputMovement.x -= 1;
+        }
+        if (keyboard.IsPressed(Key.KeyType.D))
+        {
+            inputMovement.x += 1;
+        }
+
+        if (keyboard.IsPressed(Key.KeyType.W))
+        {
+            inputMovement.z += 1;
+        }
+        if (keyboard.IsPressed(Key.KeyType.S))
+        {
+            inputMovement.z -= 1;
+        }
     }
 
     public void ResetPlayer()
@@ -29,14 +65,27 @@ public class PlayerMetaGame : MonoBehaviour
         inputMovement = _input;
     }
 
+    public void ResetHorizontal()
+    {
+        inputMovement.x = 0;
+    }
+    public void ResetVertical()
+    {
+        inputMovement.z = 0;
+    }
+
     public void SetHorizontalMovement(float _input)
     {
         inputMovement.x += _input;
+        if (inputMovement.x > 1) inputMovement.x = 1;
+        else if (inputMovement.x < -1) inputMovement.x = -1;
     }
 
     public void SetVerticalMovement(float _input)
     {
         inputMovement.z += _input;
+        if (inputMovement.z > 1) inputMovement.z = 1;
+        else if (inputMovement.z < -1) inputMovement.z = -1;
     }
 
     public void SetJumpInput(bool _jump)
@@ -44,9 +93,5 @@ public class PlayerMetaGame : MonoBehaviour
         jumpInput = _jump;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }
