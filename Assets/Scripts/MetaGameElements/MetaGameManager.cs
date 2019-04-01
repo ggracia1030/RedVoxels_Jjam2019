@@ -10,6 +10,11 @@ public class MetaGameManager : MonoBehaviour
 
     private Vector3 actualCheckpointPos;
 
+    private bool tryToHideText;
+    private float counter;
+
+    public TextMesh text;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,13 +23,25 @@ public class MetaGameManager : MonoBehaviour
 
         actualCheckpointPos = MetaPlayer.transform.position;
 
+        tryToHideText = true;
 
+        counter = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (tryToHideText)
+        {
+            counter -= 0.001f;
+            text.color = new Color(text.color.r, text.color.g, text.color.b, counter);
+
+            if(counter <= 0)
+            {
+                tryToHideText = false;
+            }
+        }
+
     }
 
     public void ResetMetaPlayerPosition()
