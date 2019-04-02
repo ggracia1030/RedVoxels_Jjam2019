@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMetaGame : MonoBehaviour
 {
     public Vector3 inputMovement;
+    public float speed;
     bool jumpInput, canJump;
     public Vector3 startPosition, jumpForceVector;
     [SerializeField] float jumpForce;
@@ -38,20 +39,20 @@ public class PlayerMetaGame : MonoBehaviour
     {
         if(keyboard.IsPressed(Key.KeyType.A))
         {
-            inputMovement.x -= 1;
+            inputMovement.x -= speed;
         }
         if (keyboard.IsPressed(Key.KeyType.D))
         {
-            inputMovement.x += 1;
+            inputMovement.x += speed;
         }
 
         if (keyboard.IsPressed(Key.KeyType.W))
         {
-            inputMovement.z += 1;
+            inputMovement.z += speed;
         }
         if (keyboard.IsPressed(Key.KeyType.S))
         {
-            inputMovement.z -= 1;
+            inputMovement.z -= speed;
         }
         if(jumpInput = keyboard.IsPressed(Key.KeyType.Space))
         {

@@ -65,7 +65,7 @@ public class Platform : MonoBehaviour
         {
 
 
-            if (Vector3.Distance(gameObject.transform.position, Points[currentPoint]) < 0.4f)
+            if (Vector3.Distance(gameObject.transform.position, Points[currentPoint]) < 0.2f)
             {
 
                 if (stopInThePoints)                                            //if we decided to stop in everypoint

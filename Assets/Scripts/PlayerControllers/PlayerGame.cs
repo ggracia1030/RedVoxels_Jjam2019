@@ -9,7 +9,7 @@ public class PlayerGame : MonoBehaviour
     public float speed, jumpForce;
     Quaternion direction;
     Vector3 inputMovement, jumpForceVector;
-    bool space, canJump;
+    bool space, canJump, isCarrying, eKey;
     
 
     // Start is called before the first frame update
@@ -29,15 +29,26 @@ public class PlayerGame : MonoBehaviour
     {
         PlayerMovement();
         RotatePlayer();
-        
+        CheckJump();
     }
 
 
     void UpdateInput()
     {
         inputMovement = new Vector3(InputManager.Instance.GetAxis("Horizontal") * Time.deltaTime * speed * 100, 0, InputManager.Instance.GetAxis("Vertical") * Time.deltaTime * speed * 100);
-        space = InputManager.Instance.GetKeyDown(KeyCode.Space); 
+        space = InputManager.Instance.GetButtonDown("Jump");
+        eKey = InputManager.Instance.GetButtonDown("Action");
+        if(eKey && isCarrying)
+        {
+            Invoke("ResCarry", 1);
+            foreach(Transform child in tf)
+            {
+                child.transform.parent = null;
+            }
+        }
     }
+
+    void ResCarry() { isCarrying = false; }
 
     void PlayerMovement()
     {
@@ -58,29 +69,23 @@ public class PlayerGame : MonoBehaviour
         tf.rotation = Quaternion.Euler(0,Vector3.Normalize(inputMovement).y,0);
     }
 
-    private void OnCollisionStay(Collision collision)
+    void CheckJump()
     {
-
-        if (canJump = collision.contacts[0].normal.y > 0.5) { }
-
-        if (collision.gameObject.tag == "Key")
+        RaycastHit hit;
+        if (Physics.Raycast(rb.position, Vector3.down, out hit, Mathf.Infinity))
         {
-            collision.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
+            if (canJump = hit.distance < 0.7f) { }
         }
-      
-       
     }
 
-    private void OnCollisionExit(Collision collision)
+
+
+    private void OnTriggerStay(Collider other)
     {
-
-        
-
-        if (collision.gameObject.tag == "Key")
+        if(other.gameObject.tag == "Carriable" && eKey && !isCarrying)
         {
-            collision.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+            other.gameObject.transform.parent = tf;
+            isCarrying = true;
         }
-
-
     }
 }

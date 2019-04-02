@@ -10,6 +10,8 @@ public class GameManager : Singleton<GameManager>
     int currentLevel;
     public bool gamePaused;
 
+    bool changingScene;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,19 +26,21 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeScene(GameState _gameState, int level = 0)
     {
+        if (changingScene) return;
         gameState = _gameState;
         currentLevel = level;
+        changingScene = true;
         StartCoroutine(FadeOutCamera(_gameState, level));
     }
 
     public void ChangeToLevel(int level)
     {
-        ChangeScene(gameState, level);
+        ChangeScene(GameState.InGame, level);
     }
 
     public void ChangeToNextLevel()
     {
-        ChangeScene(gameState, ++currentLevel);
+        ChangeScene(GameState.InGame, ++currentLevel);
     }
 
     public void SetGamePaused(bool _paused)
@@ -68,10 +72,12 @@ public class GameManager : Singleton<GameManager>
         }
         if (gameState == GameState.InGame)
         {
+            changingScene = false;
             SceneManager.LoadScene("Level" + level);
         }
         else
         {
+            changingScene = false;
             SceneManager.LoadScene(_gameState.ToString());
         }
         yield return null;
