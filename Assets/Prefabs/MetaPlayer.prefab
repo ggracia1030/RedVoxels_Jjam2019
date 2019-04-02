@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 3584668459917502495}
   - component: {fileID: 3584668459917502492}
   - component: {fileID: 3584668459917502489}
-  - component: {fileID: 3584668459917502493}
   - component: {fileID: 3584668459917502488}
+  - component: {fileID: 8318629187048780677}
   m_Layer: 0
   m_Name: MetaPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -93,23 +93,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputMovement: {x: 0, y: 0, z: 0}
+  speed: 3
   startPosition: {x: 0, y: 0, z: 0}
   jumpForceVector: {x: 0, y: 0, z: 0}
-  jumpForce: 0.2
+  jumpForce: 0.4
   keyboard: {fileID: 0}
---- !u!65 &3584668459917502493
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3584668459917502498}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3584668459917502488
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,3 +114,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!135 &8318629187048780677
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584668459917502498}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
