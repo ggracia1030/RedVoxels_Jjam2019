@@ -9,7 +9,7 @@ public class PlayerGame : MonoBehaviour
     public float speed, jumpForce;
     Quaternion direction;
     Vector3 inputMovement, jumpForceVector;
-    bool space, canJump, isCarrying, eKey, eKeyUp;
+    bool space, canJump, isCarrying, eKey;
     
 
     // Start is called before the first frame update
@@ -29,6 +29,7 @@ public class PlayerGame : MonoBehaviour
     {
         PlayerMovement();
         RotatePlayer();
+        CheckJump();
     }
 
 
@@ -37,7 +38,6 @@ public class PlayerGame : MonoBehaviour
         inputMovement = new Vector3(InputManager.Instance.GetAxis("Horizontal") * Time.deltaTime * speed * 100, 0, InputManager.Instance.GetAxis("Vertical") * Time.deltaTime * speed * 100);
         space = InputManager.Instance.GetButtonDown("Jump");
         eKey = InputManager.Instance.GetButtonDown("Action");
-        eKeyUp = InputManager.Instance.GetButtonUp("Action");
         if(eKey && isCarrying)
         {
             Invoke("ResCarry", 1);
@@ -69,9 +69,13 @@ public class PlayerGame : MonoBehaviour
         tf.rotation = Quaternion.Euler(0,Vector3.Normalize(inputMovement).y,0);
     }
 
-    private void OnCollisionStay(Collision collision)
+    void CheckJump()
     {
-        if (canJump = collision.contacts[0].normal.y > 0.5) { }
+        RaycastHit hit;
+        if (Physics.Raycast(rb.position, Vector3.down, out hit, Mathf.Infinity))
+        {
+            if (canJump = hit.distance < 0.7f) { }
+        }
     }
 
 

@@ -30,7 +30,7 @@ public class Key : MonoBehaviour
     private void OnCollisionExit(Collision collision)
     {
         
-        if(collision.gameObject.tag == "Player")
+        if(collision.gameObject.tag == "Player" || collision.gameObject.tag == "Carriable")
         {
             isPressed = false;
             rend.material.SetColor("_EmissionColor", Color.black);
