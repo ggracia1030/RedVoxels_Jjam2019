@@ -9,7 +9,7 @@ public class PlayerGame : MonoBehaviour
     public float speed, jumpForce;
     Quaternion direction;
     Vector3 inputMovement, jumpForceVector;
-    bool space, canJump;
+    bool space, canJump, isCarrying, eKey, eKeyUp;
     
 
     // Start is called before the first frame update
@@ -29,14 +29,23 @@ public class PlayerGame : MonoBehaviour
     {
         PlayerMovement();
         RotatePlayer();
-        
     }
 
 
     void UpdateInput()
     {
         inputMovement = new Vector3(InputManager.Instance.GetAxis("Horizontal") * Time.deltaTime * speed * 100, 0, InputManager.Instance.GetAxis("Vertical") * Time.deltaTime * speed * 100);
-        space = InputManager.Instance.GetKeyDown(KeyCode.Space); 
+        space = InputManager.Instance.GetButtonDown("Jump");
+        eKey = InputManager.Instance.GetButtonDown("Action");
+        eKeyUp = InputManager.Instance.GetButtonUp("Action");
+        if(eKeyUp && isCarrying)
+        {
+            isCarrying = false;
+            foreach(Transform child in tf)
+            {
+                child.transform.parent = null;
+            }
+        }
     }
 
     void PlayerMovement()
@@ -60,27 +69,17 @@ public class PlayerGame : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-
         if (canJump = collision.contacts[0].normal.y > 0.5) { }
-
-        if (collision.gameObject.tag == "Key")
-        {
-            collision.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.red);
-        }
-      
-       
     }
 
-    private void OnCollisionExit(Collision collision)
+
+
+    private void OnTriggerStay(Collider other)
     {
-
-        
-
-        if (collision.gameObject.tag == "Key")
+        if(other.gameObject.tag == "Carriable" && eKey && !isCarrying)
         {
-            collision.gameObject.GetComponent<Renderer>().material.SetColor("_EmissionColor", Color.black);
+            other.gameObject.transform.parent = tf;
+            isCarrying = true;
         }
-
-
     }
 }
