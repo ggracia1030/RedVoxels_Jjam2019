@@ -38,15 +38,17 @@ public class PlayerGame : MonoBehaviour
         space = InputManager.Instance.GetButtonDown("Jump");
         eKey = InputManager.Instance.GetButtonDown("Action");
         eKeyUp = InputManager.Instance.GetButtonUp("Action");
-        if(eKeyUp && isCarrying)
+        if(eKey && isCarrying)
         {
-            isCarrying = false;
+            Invoke("ResCarry", 1);
             foreach(Transform child in tf)
             {
                 child.transform.parent = null;
             }
         }
     }
+
+    void ResCarry() { isCarrying = false; }
 
     void PlayerMovement()
     {
