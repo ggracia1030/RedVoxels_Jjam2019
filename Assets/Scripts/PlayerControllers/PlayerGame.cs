@@ -11,10 +11,10 @@ public class PlayerGame : MonoBehaviour
     Vector3 inputMovement, jumpForceVector;
     bool space, canJump, isCarrying, eKey;
 
-    Vector3 cRightUp    =    new Vector3( 0.5f, 0,  0.5f);
-    Vector3 cRightDown  =    new Vector3( 0.5f, 0, -0.5f);
-    Vector3 cLeftUp     =    new Vector3(-0.5f, 0,  0.5f);
-    Vector3 cLeftDown   =    new Vector3(-0.5f, 0, -0.5f);
+    Vector3 cRightUp    =    new Vector3( 0.5f, -0.5f,  0.5f);
+    Vector3 cRightDown  =    new Vector3( 0.5f, -0.5f, -0.5f);
+    Vector3 cLeftUp     =    new Vector3(-0.5f, -0.5f,  0.5f);
+    Vector3 cLeftDown   =    new Vector3(-0.5f, -0.5f, -0.5f);
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +48,7 @@ public class PlayerGame : MonoBehaviour
             foreach(Transform child in tf)
             {
                 child.transform.parent = null;
+                child.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
     }
@@ -110,6 +111,7 @@ public class PlayerGame : MonoBehaviour
         if(other.gameObject.tag == "Carriable" && eKey && !isCarrying)
         {
             other.gameObject.transform.parent = tf;
+            other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             isCarrying = true;
         }
     }

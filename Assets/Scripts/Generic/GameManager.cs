@@ -64,6 +64,7 @@ public class GameManager : Singleton<GameManager>
     IEnumerator FadeOutCamera(GameState _gameState, int level = 0)
     {
         float maxTime = 1;
+
         CanvasGroup mainCanvas = GameObject.Find("MainCanvas").GetComponent<CanvasGroup>();
         for(float time = 0; time < maxTime; time+=Time.deltaTime)
         {
