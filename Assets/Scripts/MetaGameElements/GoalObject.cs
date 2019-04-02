@@ -18,8 +18,6 @@ public class GoalObject : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-
-
         if (other.gameObject.tag == "Player")
         {
             actualGoalTime -= Time.deltaTime;
@@ -31,8 +29,6 @@ public class GoalObject : MonoBehaviour
                 GameManager.Instance.ChangeToNextLevel();
 
             }
-
-
         }
     }
 
