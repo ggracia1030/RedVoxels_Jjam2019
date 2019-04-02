@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1694963715646205788}
   - component: {fileID: 1694963715646205789}
   - component: {fileID: 1694963715646205790}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Helper
   m_TagString: Carriable
   m_Icon: {fileID: 0}
@@ -91,8 +91,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.4607153, y: 1.5823298, z: 2.4301987}
-  m_Center: {x: -0.032779217, y: -0.019754887, z: 0.056526184}
+  m_Size: {x: 2.4607153, y: 0.8374076, z: 2.4301987}
+  m_Center: {x: -0.032779217, y: 0.041223288, z: 0.056526184}
 --- !u!54 &1694963715646205789
 Rigidbody:
   m_ObjectHideFlags: 0

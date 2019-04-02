@@ -10,6 +10,7 @@ public class PlayerGame : MonoBehaviour
     Quaternion direction;
     Vector3 inputMovement, jumpForceVector;
     bool space, canJump, isCarrying, eKey;
+    [SerializeField] LayerMask mask;
 
     Vector3 cRightUp    =    new Vector3( 0.5f, -0.4f,  0.5f);
     Vector3 cRightDown  =    new Vector3( 0.5f, -0.4f, -0.5f);
@@ -84,23 +85,23 @@ public class PlayerGame : MonoBehaviour
 
 
         RaycastHit hit0;
-        if (Physics.Raycast(rb.position + cRightUp, Vector3.down, out hit0, Mathf.Infinity))
+        if (Physics.Raycast(rb.position + cRightUp, Vector3.down, out hit0, Mathf.Infinity, mask))
         {
             if (h0 = hit0.distance < 0.5f) { }
 
         }
         RaycastHit hit1;
-        if (Physics.Raycast(rb.position + cRightDown, Vector3.down, out hit1, Mathf.Infinity))
+        if (Physics.Raycast(rb.position + cRightDown, Vector3.down, out hit1, Mathf.Infinity, mask))
         {
             if (h1 = hit1.distance < 0.5f) { }
         }
         RaycastHit hit2;
-        if (Physics.Raycast(rb.position + cLeftUp, Vector3.down, out hit2, Mathf.Infinity))
+        if (Physics.Raycast(rb.position + cLeftUp, Vector3.down, out hit2, Mathf.Infinity, mask))
         {
             if (h2 = hit2.distance < 0.5f) { }
         }
         RaycastHit hit3;
-        if (Physics.Raycast(rb.position + cLeftDown, Vector3.down, out hit3, Mathf.Infinity))
+        if (Physics.Raycast(rb.position + cLeftDown, Vector3.down, out hit3, Mathf.Infinity, mask))
         {
             if (h3 = hit3.distance < 0.5f) { }
         }

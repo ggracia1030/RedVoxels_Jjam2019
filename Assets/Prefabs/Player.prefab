@@ -123,3 +123,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   jumpForce: 3.97
+  mask:
+    serializedVersion: 2
+    m_Bits: 823
