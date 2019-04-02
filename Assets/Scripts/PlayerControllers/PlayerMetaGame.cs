@@ -12,6 +12,11 @@ public class PlayerMetaGame : MonoBehaviour
     Rigidbody rb;
     [SerializeField] Keyboard keyboard;
 
+    Vector3 cRightUp    = new Vector3( 0.5f, 0,  0.5f);
+    Vector3 cRightDown  = new Vector3( 0.5f, 0, -0.5f);
+    Vector3 cLeftUp     = new Vector3(-0.5f, 0,  0.5f);
+    Vector3 cLeftDown   = new Vector3(-0.5f, 0, -0.5f);
+
 
     // Start is called before the first frame update
     void Start()
@@ -103,14 +108,36 @@ public class PlayerMetaGame : MonoBehaviour
         jumpInput = _jump;
     }
 
-   void CheckJump()
+    void CheckJump()
     {
-        RaycastHit hit;
-        if(Physics.Raycast(rb.position, Vector3.down , out hit , Mathf.Infinity ))
+        bool h0, h1, h2, h3;
+        h0 = h1 = h2 = h3 = false;
+
+        RaycastHit hit0;
+        if (Physics.Raycast(rb.position + cRightUp, Vector3.down, out hit0, Mathf.Infinity))
         {
-            if (canJump = hit.distance < 0.7f) { }
+            if (h0 = hit0.distance < 0.7f) { }
+
         }
+        RaycastHit hit1;
+        if (Physics.Raycast(rb.position + cRightDown, Vector3.down, out hit1, Mathf.Infinity))
+        {
+            if (h1 = hit1.distance < 0.7f) { }
+        }
+        RaycastHit hit2;
+        if (Physics.Raycast(rb.position + cLeftUp, Vector3.down, out hit2, Mathf.Infinity))
+        {
+            if (h2 = hit2.distance < 0.7f) { }
+        }
+        RaycastHit hit3;
+        if (Physics.Raycast(rb.position + cLeftDown, Vector3.down, out hit3, Mathf.Infinity))
+        {
+            if (h3 = hit3.distance < 0.7f) { }
+        }
+
+        if (h0 || h1 || h2 || h3) { canJump = true; }
     }
+
 
     void PlayerJump()
     {
