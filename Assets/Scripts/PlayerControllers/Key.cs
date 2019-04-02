@@ -5,7 +5,7 @@ using UnityEngine;
 public class Key : MonoBehaviour
 {
 
-    public enum KeyType { W, A, S, D, Space};
+    public enum KeyType { W, A, S, D, Space, Esc};
     [SerializeField] KeyType keyType;
     public bool isPressed;
     Renderer rend;

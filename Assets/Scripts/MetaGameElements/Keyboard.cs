@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Keyboard : MonoBehaviour
 {
-    [SerializeField] Key w, a, s, d, space;
+    [SerializeField] Key w, a, s, d, space, esc;
     // Start is called before the first frame update
     public bool IsPressed(Key.KeyType _type)
     {
@@ -20,6 +20,8 @@ public class Keyboard : MonoBehaviour
                 return d.isPressed;
             case Key.KeyType.Space:
                 return space.isPressed;
+            case Key.KeyType.Esc:
+                return esc.isPressed;
         }
         return false;
     }
