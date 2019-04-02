@@ -12,10 +12,10 @@ public class PlayerMetaGame : MonoBehaviour
     Rigidbody rb;
     [SerializeField] Keyboard keyboard;
 
-    Vector3 cRightUp    = new Vector3( 0.5f, -0.5f,  0.5f);
-    Vector3 cRightDown  = new Vector3( 0.5f, -0.5f, -0.5f);
-    Vector3 cLeftUp     = new Vector3(-0.5f, -0.5f,  0.5f);
-    Vector3 cLeftDown   = new Vector3(-0.5f, -0.5f, -0.5f);
+    Vector3 cRightUp    = new Vector3( 0.5f, -0.4f,  0.5f);
+    Vector3 cRightDown  = new Vector3( 0.5f, -0.4f, -0.5f);
+    Vector3 cLeftUp     = new Vector3(-0.5f, -0.4f,  0.5f);
+    Vector3 cLeftDown   = new Vector3(-0.5f, -0.4f, -0.5f);
 
 
     // Start is called before the first frame update
@@ -116,23 +116,23 @@ public class PlayerMetaGame : MonoBehaviour
         RaycastHit hit0;
         if (Physics.Raycast(rb.position + cRightUp, Vector3.down, out hit0, Mathf.Infinity))
         {
-            if (h0 = hit0.distance < 0.7f) { }
+            if (h0 = hit0.distance < 0.5f) { }
 
         }
         RaycastHit hit1;
         if (Physics.Raycast(rb.position + cRightDown, Vector3.down, out hit1, Mathf.Infinity))
         {
-            if (h1 = hit1.distance < 0.7f) { }
+            if (h1 = hit1.distance < 0.5f) { }
         }
         RaycastHit hit2;
         if (Physics.Raycast(rb.position + cLeftUp, Vector3.down, out hit2, Mathf.Infinity))
         {
-            if (h2 = hit2.distance < 0.7f) { }
+            if (h2 = hit2.distance < 0.5f) { }
         }
         RaycastHit hit3;
         if (Physics.Raycast(rb.position + cLeftDown, Vector3.down, out hit3, Mathf.Infinity))
         {
-            if (h3 = hit3.distance < 0.7f) { }
+            if (h3 = hit3.distance < 0.5f) { }
         }
 
         if (h0 || h1 || h2 || h3) { canJump = true; }

@@ -11,16 +11,17 @@ public class PlayerGame : MonoBehaviour
     Vector3 inputMovement, jumpForceVector;
     bool space, canJump, isCarrying, eKey;
 
-    Vector3 cRightUp    =    new Vector3( 0.5f, -0.5f,  0.5f);
-    Vector3 cRightDown  =    new Vector3( 0.5f, -0.5f, -0.5f);
-    Vector3 cLeftUp     =    new Vector3(-0.5f, -0.5f,  0.5f);
-    Vector3 cLeftDown   =    new Vector3(-0.5f, -0.5f, -0.5f);
+    Vector3 cRightUp    =    new Vector3( 0.5f, -0.4f,  0.5f);
+    Vector3 cRightDown  =    new Vector3( 0.5f, -0.4f, -0.5f);
+    Vector3 cLeftUp     =    new Vector3(-0.5f, -0.4f,  0.5f);
+    Vector3 cLeftDown   =    new Vector3(-0.5f, -0.4f, -0.5f);
 
     // Start is called before the first frame update
     void Start()
     {
         tf = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        canJump = true;
     }
 
     // Update is called once per frame
@@ -44,7 +45,7 @@ public class PlayerGame : MonoBehaviour
         eKey = InputManager.Instance.GetButtonDown("Action");
         if(eKey && isCarrying)
         {
-            Invoke("ResCarry", 1);
+            Invoke("ResCarry", 0.2f);
             foreach(Transform child in tf)
             {
                 child.transform.parent = null;
@@ -63,9 +64,11 @@ public class PlayerGame : MonoBehaviour
 
     void PlayerJump()
     {
+
         jumpForceVector = new Vector3(0f, jumpForce * 100, 0f);
         rb.AddForce(jumpForceVector);
         canJump = false;
+        
         Debug.Log("jump");
     }
 
@@ -79,29 +82,31 @@ public class PlayerGame : MonoBehaviour
         bool h0, h1, h2, h3;
         h0 = h1 = h2 = h3 = false;
 
+
         RaycastHit hit0;
         if (Physics.Raycast(rb.position + cRightUp, Vector3.down, out hit0, Mathf.Infinity))
         {
-            if (h0 = hit0.distance < 0.7f) { }
+            if (h0 = hit0.distance < 0.5f) { }
 
         }
         RaycastHit hit1;
         if (Physics.Raycast(rb.position + cRightDown, Vector3.down, out hit1, Mathf.Infinity))
         {
-            if (h1 = hit1.distance < 0.7f) { }
+            if (h1 = hit1.distance < 0.5f) { }
         }
         RaycastHit hit2;
         if (Physics.Raycast(rb.position + cLeftUp, Vector3.down, out hit2, Mathf.Infinity))
         {
-            if (h2 = hit2.distance < 0.7f) { }
+            if (h2 = hit2.distance < 0.5f) { }
         }
         RaycastHit hit3;
         if (Physics.Raycast(rb.position + cLeftDown, Vector3.down, out hit3, Mathf.Infinity))
         {
-            if (h3 = hit3.distance < 0.7f) { }
+            if (h3 = hit3.distance < 0.5f) { }
         }
 
         if (h0 || h1 || h2 || h3) { canJump = true; }
+        else canJump = false;
     }
 
 
