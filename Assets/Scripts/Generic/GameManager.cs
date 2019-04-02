@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    public enum GameState { MainMenu, InGame, Pause, GameOver};
+    const int MAX_LEVEL = 5;
+    public enum GameState { MainMenu, InGame, Pause, Credits};
     GameState gameState;
     int currentLevel;
     public bool gamePaused;
@@ -40,7 +41,11 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeToNextLevel()
     {
-        ChangeScene(GameState.InGame, ++currentLevel);
+        if(++currentLevel >= MAX_LEVEL)
+        {
+            ChangeScene(GameState.Credits);
+        }
+        ChangeScene(GameState.InGame, currentLevel);
     }
 
     public void SetGamePaused(bool _paused)
