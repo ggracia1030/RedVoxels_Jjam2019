@@ -31,12 +31,12 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeToLevel(int level)
     {
-        ChangeScene(gameState, level);
+        ChangeScene(GameState.InGame, level);
     }
 
     public void ChangeToNextLevel()
     {
-        ChangeScene(gameState, ++currentLevel);
+        ChangeScene(GameState.InGame, ++currentLevel);
     }
 
     public void SetGamePaused(bool _paused)
