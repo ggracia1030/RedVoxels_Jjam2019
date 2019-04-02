@@ -48,6 +48,7 @@ public class PlayerGame : MonoBehaviour
             foreach(Transform child in tf)
             {
                 child.transform.parent = null;
+                child.GetComponent<Rigidbody>().isKinematic = true;
             }
         }
     }
@@ -110,6 +111,7 @@ public class PlayerGame : MonoBehaviour
         if(other.gameObject.tag == "Carriable" && eKey && !isCarrying)
         {
             other.gameObject.transform.parent = tf;
+            other.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             isCarrying = true;
         }
     }
