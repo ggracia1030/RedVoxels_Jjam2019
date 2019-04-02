@@ -48,7 +48,7 @@ public class PlayerGame : MonoBehaviour
             foreach(Transform child in tf)
             {
                 child.transform.parent = null;
-                child.GetComponent<Rigidbody>().isKinematic = true;
+                child.GetComponent<Rigidbody>().isKinematic = false;
             }
         }
     }
