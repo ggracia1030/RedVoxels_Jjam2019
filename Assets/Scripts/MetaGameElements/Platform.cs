@@ -151,7 +151,7 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "MetaPlayer")
         {
 
             switch (pType)
@@ -174,7 +174,7 @@ public class Platform : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "MetaPlayer")
         {
 
             switch (pType)

@@ -25,11 +25,15 @@ public class DeathBox : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "MetaPlayer")
         {
             //THEN HES DEAAD
             metaGameManager.ResetMetaPlayerPosition();
 
+        }
+        else if(other.tag == "Player")
+        {
+            other.transform.position = Vector3.zero;
         }
     }
 

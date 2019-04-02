@@ -42,6 +42,10 @@ public class PlayerMetaGame : MonoBehaviour
 
     void UpdateControlls()
     {
+        if(keyboard.IsPressed(Key.KeyType.Esc))
+        {
+            GameManager.Instance.ChangeScene(GameManager.GameState.MainMenu);
+        }
         if(keyboard.IsPressed(Key.KeyType.A))
         {
             inputMovement.x -= speed;

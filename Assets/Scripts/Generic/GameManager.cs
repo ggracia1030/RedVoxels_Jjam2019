@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    const int MAX_LEVEL = 5;
+    const int MAX_LEVEL = 4;
     public enum GameState { MainMenu, InGame, Pause, Credits};
     GameState gameState;
     int currentLevel;
@@ -27,6 +27,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeScene(GameState _gameState, int level = 0)
     {
+        if (gameState == GameState.MainMenu) currentLevel = 0;
         if (changingScene) return;
         gameState = _gameState;
         currentLevel = level;
@@ -41,7 +42,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeToNextLevel()
     {
-        if(++currentLevel >= MAX_LEVEL)
+        if(++currentLevel > MAX_LEVEL)
         {
             ChangeScene(GameState.Credits);
         }

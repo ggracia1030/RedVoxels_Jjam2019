@@ -18,6 +18,11 @@ public class MainMenu : MonoBehaviour
     {
         GetComponent<Animator>().SetTrigger("BeginTransition");
     }
+
+    public void onClickExit()
+    {
+        Application.Quit();
+    }
     public void ChangeScene()
     {
         GameManager.Instance.ChangeToLevel(0);
