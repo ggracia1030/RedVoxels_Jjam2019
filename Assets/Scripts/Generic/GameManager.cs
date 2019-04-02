@@ -42,7 +42,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ChangeToNextLevel()
     {
-        if(++currentLevel >= MAX_LEVEL)
+        if(++currentLevel > MAX_LEVEL)
         {
             ChangeScene(GameState.Credits);
         }
