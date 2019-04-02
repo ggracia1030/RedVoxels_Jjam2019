@@ -8,7 +8,7 @@ public class MetaGameManager : MonoBehaviour
 
     [SerializeField] GameObject MetaPlayer;
 
-    private Vector3 actualCheckpointPos;
+    protected Vector3 actualCheckpointPos;
 
     private bool tryToHideText;
     private float counter;

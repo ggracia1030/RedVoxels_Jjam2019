@@ -18,7 +18,7 @@ public class GoalObject : MonoBehaviour
 
     public void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "MetaPlayer")
         {
             actualGoalTime -= Time.deltaTime;
 
@@ -34,7 +34,7 @@ public class GoalObject : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "MetaPlayer")
         {
             actualGoalTime = maxGoalTime;
         }
