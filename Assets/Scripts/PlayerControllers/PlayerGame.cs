@@ -64,10 +64,10 @@ public class PlayerGame : MonoBehaviour
 
     void PlayerJump()
     {
-
         jumpForceVector = new Vector3(0f, jumpForce * 100, 0f);
         rb.AddForce(jumpForceVector);
         canJump = false;
+        space = false;
         
         Debug.Log("jump");
     }
